@@ -25,10 +25,8 @@ let filterVideoByLength = (durationElement, duration) => {
         let timeArray = timeElement.innerHTML.split(':')
         let timeInSeconds = 0
         for (let i = 0; i < timeArray.length; i++) {
-            console.log(Math.pow(60, timeArray.length - i - 1) * parseInt(timeArray[i], 10))
             timeInSeconds = timeInSeconds + Math.pow(60, timeArray.length - i - 1) * parseInt(timeArray[i], 10)
         }
-        console.log(timeInSeconds)
         if (timeInSeconds < duration) {
             deletionQueue.add(durationElement)
             return false
@@ -43,14 +41,13 @@ let filterVideoByLength = (durationElement, duration) => {
 
 let parseForDeletion = commonParent => {
     if (commonParent.tagName.toLowerCase() !== 'ytd-item-section-renderer'){
-        console.log(commonParent.tagName)
         return;
     }
     let titleElement = commonParent.querySelector('a#video-title');
     if (filterVideoByTitle(titleElement) === null) return
     let descElement = commonParent.querySelector('yt-formatted-string#description-text')
     if(!filterVideoByDesc(descElement)){
-        console.log('Adding based on duration', titleElement.title)
+        console.log('Adding based on desc', titleElement.title)
         return
     }
     let durationElement = commonParent.querySelector('ytd-thumbnail-overlay-time-status-renderer')
@@ -81,7 +78,6 @@ let removeVideosOnLoad = () => {
         container.parentElement.removeChild(container);
     })
     deletionQueue.clear()
-    console.log('finish page load parsing')
 }
 removeVideosOnLoad()
 
