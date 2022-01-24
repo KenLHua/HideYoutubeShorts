@@ -1,0 +1,33 @@
+{
+  "name": "aHide Youtube Shorts",
+  "description": "Hides videos w/ length <1 minute",
+  "version": "1.0",
+  "manifest_version": 3,
+  "permissions": [
+    "activeTab",
+    "scripting"
+  ],
+
+  "background": {
+    "service_worker": "background.js"
+  },
+  "content_scripts": [
+    {
+      "matches": ["https://*.youtube.com/feed/subscriptions"],
+      "run_at": "document_idle",
+      "js": ["contentScript.js"]
+    }
+  ],
+
+
+  "options_page": "options.html",
+  "action": {
+    "default_popup": "popup.html",
+    "default_icon": {
+      "16": "/images/get_started16.png",
+      "32": "/images/get_started32.png",
+      "48": "/images/get_started48.png",
+      "128": "/images/get_started128.png"
+    }
+  }
+}
