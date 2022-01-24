@@ -24,4 +24,5 @@ Notes
 Issues
 
 [x] FIXED - Youtube lazy loads video duration, if script attempts to filter when no time is available, filter by time will be skipped
+
 [] Navigation to subscriptions from homepage doesn't trigger filters
