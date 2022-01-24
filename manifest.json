@@ -14,9 +14,6 @@
       "js": ["contentScript.js"]
     }
   ],
-
-
-  "options_page": "options.html",
   "action": {
     "default_icon": {
       "16": "/images/get_started16.png",
