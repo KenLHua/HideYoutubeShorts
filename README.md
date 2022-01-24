@@ -1,4 +1,6 @@
 # HideYoutubeShorts
+![Youtube logo and Tiktok Logo Cancelled](https://github.com/KenLHua/HideYoutubeShorts/blob/master/images/logo.jpg)
+
 
 How to use unpublished chrome extensions:
 1. Follow https://developer.chrome.com/docs/extensions/mv3/getstarted/ under **Load an unpacked extension**
