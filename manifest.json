@@ -1,5 +1,5 @@
 {
-  "name": "aHide Youtube Shorts",
+  "name": "Hide Youtube Shorts",
   "description": "Hides videos w/ length <1 minute",
   "version": "1.0",
   "manifest_version": 3,
@@ -7,10 +7,6 @@
     "activeTab",
     "scripting"
   ],
-
-  "background": {
-    "service_worker": "background.js"
-  },
   "content_scripts": [
     {
       "matches": ["https://*.youtube.com/feed/subscriptions"],
@@ -22,7 +18,6 @@
 
   "options_page": "options.html",
   "action": {
-    "default_popup": "popup.html",
     "default_icon": {
       "16": "/images/get_started16.png",
       "32": "/images/get_started32.png",
