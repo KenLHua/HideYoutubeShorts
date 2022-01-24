@@ -10,6 +10,7 @@ Hide videos from subscription box that are shorts
 Notes 
 * Only hides videos within https://www.youtube.com/feed/subscriptions, other videos found in search or anywhere else isn't touched
 * Tested only with list view
+* Only made for chromium browsers
 
 Issues
 
