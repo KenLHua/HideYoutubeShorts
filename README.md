@@ -1,5 +1,5 @@
 # HideYoutubeShorts
-![Youtube logo and Tiktok Logo Cancelled](https://github.com/KenLHua/HideYoutubeShorts/blob/master/images/logo.jpg)
+![Youtube logo and Tiktok Logo Cancelled](https://github.com/KenLHua/HideYoutubeShorts/blob/master/images/logo.png)
 
 
 How to use unpublished chrome extensions:
