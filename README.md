@@ -3,7 +3,10 @@
 How to use unpublished chrome extensions:
 1. Follow https://developer.chrome.com/docs/extensions/mv3/getstarted/ under **Load an unpacked extension**
 
-Hide videos from subscription box that are shorts
+
+What it does:
+
+Hides videos from subscription box that are shorts
 
 [x] Hide videos with titles containing "#shorts"
 
