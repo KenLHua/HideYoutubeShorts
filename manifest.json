@@ -3,15 +3,22 @@
   "description": "Hides videos w/ length <1 minute",
   "version": "1.0",
   "manifest_version": 3,
+  "background": {
+    "service_worker" : "background.js"
+  },
   "permissions": [
     "activeTab",
-    "scripting"
+    "scripting",
+    "webNavigation",
+    "tabs"
   ],
+  "host_permissions": ["https://www.youtube.com/feed/subscriptions"],
   "content_scripts": [
     {
-      "matches": ["https://*.youtube.com/feed/subscriptions"],
-      "run_at": "document_idle",
-      "js": ["contentScript.js"]
+      "matches": ["https://www.youtube.com/feed/subscriptions"],
+      "run_at": "document_end",
+      "js": ["contentScript.js"],
+      "all_frames" : false
     }
   ],
   "action": {

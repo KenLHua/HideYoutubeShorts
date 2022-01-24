@@ -1,10 +1,4 @@
-var deletionQueue = new Set()
-var videoDuration = 60
-var retryQueue = new Set()
-
-var singletonInterval = null
-
-
+console.log('defined')
 let filterVideoByTitle = video => {
     if (video.title.toLowerCase().includes('#shorts')) {
         console.log('Adding to queue by title:', video.title)
@@ -15,7 +9,7 @@ let filterVideoByTitle = video => {
 }
 
 let filterVideoByDesc = video => {
-    if(video.innerHTML.toLowerCase().includes('#shorts')){
+    if (video.innerHTML.toLowerCase().includes('#shorts')) {
         deletionQueue.add(video)
         return false
     }
@@ -41,7 +35,6 @@ let filterVideoByLength = (durationElement, duration) => {
     }
 }
 
-var retryQueue = new Set()
 let retryTimeFilter = () => {
     if (!singletonInterval) {
         console.log('setting timer')
@@ -50,14 +43,14 @@ let retryTimeFilter = () => {
             retryQueue.forEach(commonParent => {
                 let titleElement = commonParent.querySelector('a#video-title')
                 let durationElement = commonParent.querySelector('ytd-thumbnail-overlay-time-status-renderer')
-                if(durationElement)
+                if (durationElement)
                     retryQueue.delete(commonParent)
-                    if(titleElement.title.toLowerCase().includes("make your ram 30%")){
-                        console.log(commonParent)
-                    }
-                    if (!filterVideoByLength(durationElement, videoDuration)){
-                        console.log('Adding based on duration', titleElement.title)
-                    }
+                if (titleElement.title.toLowerCase().includes("make your ram 30%")) {
+                    console.log(commonParent)
+                }
+                if (!filterVideoByLength(durationElement, videoDuration)) {
+                    console.log('Adding based on duration', titleElement.title)
+                }
             })
             deletionQueue.forEach(video => {
                 let container = video.closest("ytd-item-section-renderer")
@@ -65,7 +58,7 @@ let retryTimeFilter = () => {
             })
             deletionQueue.clear()
             console.log(retryQueue)
-            if(retryQueue.size === 0 ){
+            if (retryQueue.size === 0) {
                 console.log('clearing interval')
                 window.clearInterval(singletonInterval)
                 singletonInterval = null
@@ -75,26 +68,25 @@ let retryTimeFilter = () => {
 }
 
 let parseForDeletion = commonParent => {
-    if (commonParent.tagName.toLowerCase() !== 'ytd-item-section-renderer'){
+    if (commonParent.tagName.toLowerCase() !== 'ytd-item-section-renderer') {
         return;
     }
     let titleElement = commonParent.querySelector('a#video-title');
     if (filterVideoByTitle(titleElement) === null) return
     let descElement = commonParent.querySelector('yt-formatted-string#description-text')
-    if(!filterVideoByDesc(descElement)){
+    if (!filterVideoByDesc(descElement)) {
         console.log('Adding based on desc', titleElement.title)
         return
     }
     let durationElement = commonParent.querySelector('ytd-thumbnail-overlay-time-status-renderer')
-    if(durationElement){
-        if(!filterVideoByLength(durationElement, videoDuration))
+    if (durationElement) {
+        if (!filterVideoByLength(durationElement, videoDuration))
             console.log('Adding based on duration', titleElement.title)
     }
     else
         retryQueue.add(commonParent)
-        
-    }
-    
+
+}
 
 // Remove shorts that load on page load
 let removeVideosOnLoad = () => {
@@ -104,15 +96,15 @@ let removeVideosOnLoad = () => {
         let titleElement = commonParents[i].querySelector('a#video-title')
         if (filterVideoByTitle(titleElement) === null) continue
         let descElement = commonParents[i].querySelector('yt-formatted-string#description-text')
-        if(!filterVideoByDesc(descElement)) return
+        if (!filterVideoByDesc(descElement)) return
         let durationElement = commonParents[i].getElementsByTagName('ytd-thumbnail-overlay-time-status-renderer')[0]
-        if(durationElement){
-            if(!filterVideoByLength(durationElement, videoDuration))
+        if (durationElement) {
+            if (!filterVideoByLength(durationElement, videoDuration))
                 console.log('Adding based on duration', titleElement.title)
         }
         else
             retryQueue.add(commonParents[i])
-        
+
 
     }
     deletionQueue.forEach(video => {
@@ -121,19 +113,27 @@ let removeVideosOnLoad = () => {
     })
     deletionQueue.clear()
 }
+var deletionQueue = new Set()
+var videoDuration = 60
+var retryQueue = new Set()
+
+var singletonInterval = null
+
+
+
+var retryQueue = new Set()
+
+
+
 removeVideosOnLoad()
 let subBox = document.querySelector('#contents')
-
-
-
-
-
-
 
 var videosSet = new Set()
 // Remove shorts that load on scroll
 var observer = new MutationObserver(mutations => {
+    console.log('hello')
     mutations.forEach(mutation => {
+        console.log('hello')
         for (let i = 0; i < mutation.addedNodes.length; i++) {
             videosSet.add(mutation.addedNodes[i])
         }
