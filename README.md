@@ -7,6 +7,10 @@ Hide videos from subscription box that are shorts
 
 [x] Hide videos with descriptions containing "#shorts"
 
+Notes 
+* Only hides videos within https://www.youtube.com/feed/subscriptions, other videos found in search or anywhere else isn't touched
+* Tested only with list view
+
 Issues
 
 * Youtube lazy loads video duration, if script attempts to filter when no time is available, filter by time will be skipped
