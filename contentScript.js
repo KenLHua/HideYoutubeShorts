@@ -1,46 +1,77 @@
 var deletionQueue = new Set()
+var videoDuration = 60
 
-let removeByTitle = element => {
-    console.log('removingByTitle')
-    var elements = element.querySelectorAll('a#video-title');
-    for(let i = 0; i <elements.length; i++){
-        if(elements[i].title.includes('#shorts')){
-            console.log('Adding to queue:', elements[i].title)
-            deletionQueue.add(elements[i])
-            
-        }
+
+let filterVideoByTitle = video => {
+    // console.log(video)
+
+    if(video.title.includes('#shorts')){
+        console.log('Adding to queue by title:', video.title)
+        deletionQueue.add(video)
+        return null
     }
+    return video
+} 
+
+let filterVideoByLength = (video,duration) => {
 }
 
-let removeByLength = element => {
-    var elements = document.querySelectorAll('ytd-thumbnail-overlay-time-status-renderer')
+let parseForDeletion = commonParent => {
+    if(commonParent !== 'ytd-item-section-renderer') return
+    let titleElement = commonParent.querySelector('a#video-title');
+    if(filterVideoByTitle(titleElement) === null) return
+    let durationElement = commonParent.querySelector('ytd-thumbnail-overlay-time-status-renderer')
+    filterVideoByLength(durationElement,videoDuration)
+
 }
 
-let removeShortsFromElement = (element) => {
-    removeByTitle(element)
+
+
+// Remove shorts that load on page load
+let removeVideosOnLoad = () => {
+    let commonParents = document.getElementsByTagName('ytd-item-section-renderer')
+    console.log(commonParents.length)
+    for( let i = 0; i < commonParents.length; i++){
+        let titleElement = commonParents[i].querySelector('a#video-title')
+        if(filterVideoByTitle(titleElement) === null) continue
+        let durationElement = commonParents[i].querySelector('ytd-thumbnail-overlay-time-status-renderer')
+        filterVideoByLength(durationElement,videoDuration)
+    
+    }
     deletionQueue.forEach(video => {
         let container = video.closest("ytd-item-section-renderer")
         container.parentElement.removeChild(container);
     })
     deletionQueue.clear()
+    console.log('finish page load parsing')
 }
+removeVideosOnLoad()
 
-// Remove shorts that load on page load
+
 let subBox = document.querySelector('#contents')
-removeShortsFromElement(subBox)
 
 
 
 var videosSet = new Set()
+var x = 0
 // Remove shorts that load on scroll
 var observer = new MutationObserver(mutations => {
     mutations.forEach(mutation => {
+        if( x == 0){
+            console.log(mutation.addedNodes[0])
+            x=1;
+        }
         for (let i = 0; i < mutation.addedNodes.length; i++) {
             videosSet.add(mutation.addedNodes[i])
         }
         videosSet.forEach(video => {
-            removeShortsFromElement(video)
+            parseForDeletion(video)
         })
+        deletionQueue.forEach(video => {
+            let container = video.closest("ytd-item-section-renderer")
+            container.parentElement.removeChild(container);
+        })
+        deletionQueue.clear()
         videosSet.clear()
     })
 })
