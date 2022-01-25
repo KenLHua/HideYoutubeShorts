@@ -4,8 +4,8 @@
 
 How to use unpublished chrome extensions:
 1. Follow https://developer.chrome.com/docs/extensions/mv3/getstarted/ under **Load an unpacked extension** to enable developer mode
-2. Download a .crx file from the releases
-3. Drag and drop the file into chrome://extensions
+2. Download source code
+3. Load as unpacked extension, find the folder HideYoutubeShorts and select it
 
 
 What it does:
