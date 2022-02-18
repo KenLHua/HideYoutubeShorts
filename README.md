@@ -1,9 +1,11 @@
 # HideYoutubeShorts
-![Youtube logo and Tiktok Logo Cancelled](https://github.com/KenLHua/HideYoutubeShorts/blob/master/images/logo.png)
+<img src="https://github.com/KenLHua/HideYoutubeShorts/blob/master/images/logo.png" width=150 height=90>
 
 
 How to use unpublished chrome extensions:
-1. Follow https://developer.chrome.com/docs/extensions/mv3/getstarted/ under **Load an unpacked extension**
+1. Follow https://developer.chrome.com/docs/extensions/mv3/getstarted/ under **Load an unpacked extension** to enable developer mode
+2. Download source code
+3. Load as unpacked extension, find the folder HideYoutubeShorts and select it
 
 
 What it does:
