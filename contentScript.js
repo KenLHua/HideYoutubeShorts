@@ -103,7 +103,7 @@ let removeVideosOnLoad = () => {
     for (let i = 0; i < commonParents.length; i++) {
         let titleElement = commonParents[i].querySelector('a#video-title')
         if (filterVideoByTitle(titleElement) === null) continue
-        let descElement = commonParents[i].querySelector('yt-formatted-string#description-text')
+        let descElement = commonParents[i].querySelector('yt-formatted-string#descripti on-text')
         if(!filterVideoByDesc(descElement)) return
         let durationElement = commonParents[i].getElementsByTagName('ytd-thumbnail-overlay-time-status-renderer')[0]
         if(durationElement){
@@ -149,4 +149,10 @@ var observer = new MutationObserver(mutations => {
     videosSet.clear()
     retryTimeFilter()
 })
-observer.observe(subBox, { childList: true })
+
+if(!subBox)
+    setTimeout(() => observer.observe(document.querySelector('#contents'), { childList: true }), 500)
+else
+    observer.observe(subBox, { childList: true })
+
+    
